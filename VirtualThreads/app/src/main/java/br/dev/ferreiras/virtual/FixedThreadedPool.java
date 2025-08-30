@@ -15,13 +15,11 @@ public class FixedThreadedPool {
         LOGGER.info("Number of tasks executed using 'FixedThreadPool()");
 
         long startTime = System.currentTimeMillis();
-
         try (var executor = Executors.newFixedThreadPool(500)) {
             IntStream.range(0, NUMBER_OF_TASKS).forEach(i-> {
                executor.submit(() -> {
                    Thread.sleep(Duration.ofSeconds(BLOCKING_CALL));
 //                   LOGGER.warn(Thread.currentThread().getName());
-
                    return i;
                }) ;
             });

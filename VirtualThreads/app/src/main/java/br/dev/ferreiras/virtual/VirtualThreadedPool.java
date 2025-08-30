@@ -15,9 +15,7 @@ public class VirtualThreadedPool {
         LOGGER.info("Number of tasks executed using 'VirtualThreadPool()");
 
         long startTime = System.currentTimeMillis();
-
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-
             IntStream.range(0, NUMBER_OF_TASKS).forEach(i -> {
                 executor.submit(() -> {
                     Thread.sleep(BLOCKING_CALL);
@@ -29,9 +27,7 @@ public class VirtualThreadedPool {
             LOGGER.error("Something bad had just happened! -> {}", ex.getMessage());
             throw new RuntimeException();
         }
-
         long endTime = System.currentTimeMillis();
-
         LOGGER.info("For executing -> {} tasks, duration is: -> {} ms", NUMBER_OF_TASKS, endTime - startTime);
     }
 }
