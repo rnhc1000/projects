@@ -30,7 +30,5 @@ private static final Logger LOGGER = LoggerFactory.getLogger(CachedThreadedPool.
         }
         long endTime = System.currentTimeMillis();
         LOGGER.info("For executing -> {} tasks, duration is: -> {} ms", NUMBER_OF_TASKS, endTime - startTime);
-        
     }
-
 }
