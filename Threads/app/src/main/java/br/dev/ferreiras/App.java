@@ -6,6 +6,10 @@ package br.dev.ferreiras;
 import br.dev.ferreiras.threads.ThreadWorker;
 import br.dev.ferreiras.threads.WorkerThread;
 
+import javax.xml.transform.sax.SAXSource;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,10 +17,11 @@ public class App {
 
     static int counter = 10;
     private static final Logger logger = Logger.getLogger(App.class.getName());
+
     public static class NewThread extends Thread {
         @Override
         public void run() {
-            System.out.println(getGreeting()  + this.getName());
+            System.out.println(getGreeting() + this.getName());
         }
     }
 
@@ -24,30 +29,57 @@ public class App {
         return "Hello World! ";
     }
 
-    public static void main(String[] args) {
-        Thread threadOne = new NewThread();
-        Thread threadTwo = new NewThread();
-        threadOne.setName("T-1");
-        threadTwo.setName("T-2");
-        threadOne.start();
-        threadTwo.start();
-        try {
-            threadOne.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+    public static void fizzBuzz(int n) {
+
+        for (int i = 1; i <= n; i++) {
+            if (i % 15 == 0) {
+                System.out.println("FizzBuzz");
+            } else if (i % 3 == 0) {
+                System.out.println("Fizz");
+            } else if (i % 5 == 0) {
+                System.out.println("Buzz");
+            } else {
+                System.out.println(i);
+            }
         }
 
-        WorkerThread workerThread = new WorkerThread();
-        ThreadWorker threadWorker = new ThreadWorker();
-        Thread threadOdd = new Thread(workerThread);
-        Thread threadEven = new Thread(threadWorker);
-        threadOdd.start();
-        threadEven.start();
+
+    }
+
+    public static void main(String[] args) throws IOException {
+//        Thread threadOne = new NewThread();
+//        Thread threadTwo = new NewThread();
+//        threadOne.setName("T-1");
+//        threadTwo.setName("T-2");
+//        threadOne.start();
+//        threadTwo.start();
+//        try {
+//            threadOne.join();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        WorkerThread workerThread = new WorkerThread();
+//        ThreadWorker threadWorker = new ThreadWorker();
+//        Thread threadOdd = new Thread(workerThread);
+//        Thread threadEven = new Thread(threadWorker);
+//        threadOdd.start();
+//        threadEven.start();
 
 //        for (int count = 0; count < counter; count += 1) {
 //            if(logger.isLoggable(Level.INFO)) {
 //                logger.info(String.format("Executing main thread #%d", count));
 //            }
 //        }
+
+        System.out.print("Input the number n: ");
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            int n = Integer.parseInt(bufferedReader.readLine().trim());
+            fizzBuzz(n);
+        } catch (IOException ex) {
+            throw new RuntimeException();
+        }
     }
 }
+
