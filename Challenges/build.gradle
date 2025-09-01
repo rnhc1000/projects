@@ -1,0 +1,37 @@
+plugins {
+    id 'application'
+}
+
+group = 'br.dev.ferreiras'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'br.dev.ferreiras.Main'
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j-impl:2.18.0' // Or the latest stable version
+    runtimeOnly 'org.apache.logging.log4j:log4j-core:2.18.0'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+test {
+    useJUnitPlatform()
+}
